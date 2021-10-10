@@ -7,9 +7,7 @@ project 1 - A Random Quote Generator
   // Check the "Project Resources" section of the project instructions
   // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
 
-/*** 
- * `quotes` array 
-***/
+//Multidimentional array containing objects with the following properties: quote, source, citation, year, tags.
 const quotes = [
   {
     quote: `All the world's a stage, and all the men and women merely players.`,
@@ -20,7 +18,7 @@ const quotes = [
   },
 
   {
-    quote: `Our lives are not our own. We are bound to others, past and present, and by each crime and every kindness, we birth our future.`,
+    quote: `Our lives are not how to reset a our own. We are bound to others, past and present, and by each crime and every kindness, we birth our future.`,
     source: 'David Mitchell',
     citation: 'Cloud Atlas',
     year: 2004,
@@ -95,9 +93,12 @@ const quotes = [
 
 
 
-/***
- * `getRandomQuote` function
-***/
+
+
+/**
+ * Returns a random number between 0-9 which is then used to access the objects in the quotes array.
+ * @return {object} A random object from the quotes array.
+ */
 function getRandomQuote() {
   let randomNumber = Math.floor( Math.random() * 10 );
   let randomQuote = quotes[randomNumber];
@@ -106,14 +107,26 @@ function getRandomQuote() {
 
 
 
-/***
- * `printQuote` function
-***/
-let html = '';
 
+
+const randomValue = () => Math.floor( Math.random()*256 ); //variable storing a random number between 0-255
+/**
+ * Returns a random rgb color using the randomValue variable.
+ * @return {string} A random rgb color.
+ */
+function randomRGB() {
+  const color = `rgb( ${randomValue()}, ${randomValue()}, ${randomValue()} )`;
+  return color; 
+};
+
+
+/**
+ * Prints a random quote with all its properties and changes background color.
+ * @return {string} A random quote.
+ */
 function printQuote() {
  let randomQuote = getRandomQuote();
- html = `
+ let html = `
   <p class="quote"> ${randomQuote.quote} </p>
   <p class="source"> ${randomQuote.source}
  `;
@@ -127,23 +140,19 @@ function printQuote() {
     html += `<span class="year"> ${randomQuote.tags} </span>`
   };
   html += `</p>`;
+  document.body.style.backgroundColor = randomRGB(); //Idea from https://stackoverflow.com/questions/41373407/changing-background-color-with-every-click-in-pure-javascript
   document.getElementById('quote-box').innerHTML = html ;
 };
 
-//randomRGB function - creates a random color
-const randomValue = () => Math.floor( Math.random*256 );
-
-function randomRGB() {
-  const color = `rgb( ${randomValue()}, ${randomValue()}, ${randomValue()} )`;
-  color;
+/**
+ * Calls the printQuote function every 10 seconds.
+ */
+function timingFunction() {
+  let timing = setInterval(printQuote, 10000);
+  return timing;
 }
 
-
-
-
-
-
-
+timingFunction();
 
 
 /***
