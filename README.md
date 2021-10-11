@@ -1,7 +1,7 @@
 # techdegree-project-1
  Random Quote Generator
 
-This application generates a random quote and changes the background color to a random color every 10 seconds or every time the button is pressed.
+This application generates a random quote, displays it on the page and changes the background color to a random color every 10 seconds or every time the button is pressed.
 
 Every quote is an object containing the following properties: quote, source, citation, year and tags. The quote objects are stored in the quotes array.
 
